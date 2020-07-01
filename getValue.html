@@ -1,0 +1,112 @@
+<script type="text/javascript">
+    RED.nodes.registerType('getValue',{
+        category: 'GPIO Module',
+        color: '#3232ff',
+        defaults: {
+            name:{
+                value: ""
+            },
+            mapeamento:{ value:"", type: "mapping-get-value" },
+            gpio_number:{
+                value:""
+            },
+            serial:{
+                type: "serial-template",
+                required: true
+            },
+        },
+        inputs:1,
+        outputs:1,
+        icon: "font-awesome/fa-bars",
+        label: function() { return this.name || "getValue" },
+        paletteLabel: "getValue",
+
+        oneditprepare: function() {
+            var ports = []
+            var self = this
+
+            $.getJSON('getValue',function(data) {
+                ports = data  
+                var portType = "custom";
+                for (var i in ports) {
+                    if (self.gpio_number == ports[i].value) {
+                        portType = self.gpio_number;
+                    }
+                }
+                $("#node-config-input-port").typedInput({
+                    default: self.gpio_number,
+                    types:ports
+                });
+            })
+            $("#node-input-mapeamento").val($("#node-input-mapeamento option:first").val());
+        },
+        oneditsave: function() {
+            var mytype = $("#node-config-input-port").typedInput('type');
+
+            $("#node-config-input-port").typedInput('value', mytype);
+            this.gpio_number = $("#node-config-input-port").typedInput('value');
+        }
+    });
+</script>
+
+<style>
+
+    select#node-input-mapeamento {
+        width: 100%;
+        display: none;
+    }
+
+    a#node-input-lookup-mapeamento {
+    position: absolute;
+    right: -30px !important;
+    top: 0px;
+    }
+
+    label{
+        width: 25% !important;
+    }
+</style>
+
+<script type="text/html" data-template-name="getValue">
+    <div class="form-row">
+        <label for="node-input-name" ><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-gpio_number" ><i class="fa fa-microchip"></i> GPIO number</label>
+        <input type="text" id="node-config-input-port" style="width: 22%">
+        <div style="width:20px; margin-left:215px; margin-top:-34px" selected>
+            <input type="text" id="node-input-mapeamento" placeholder="mapeamento">
+        </div>
+    </div>
+    <!-- <div class="form-row">
+        <label for="node-input-gpionum"><i class="fa fa-microchip" aria-hidden="true"></i> Numero do GPIO</label>
+        <select id="node-input-gpionum" style="width:18%">
+            <option value="0">GPA0_CN</option>
+            <option value="1">GPA1_CN</option>
+            <option value="2">GPA2_CN</option>
+            <option value="3">GPA3_CN</option>
+            <option value="4">GPA4_CN</option>
+            <option value="5">GPA5_CN</option>
+            <option value="6">GPA6_CN</option>
+            <option value="7">GPA7_CN</option>
+            <option value="8">GPA8_CN</option>
+            <option value="9">GPA9_CN</option>
+            <option value="10">GPA10_CN</option>
+            <option value="11">GPA11_CN</option>
+           
+        </select>
+        <div style="width:20px; margin-left:378px; margin-top:-34px" selected>
+            <input type="text" id="node-input-mapeamento" placeholder="mapeamento">
+        </div>
+    </div> -->
+    <div class="form-row node-input-serial">
+        <label for="node-input-serial" ><i class="fa fa-random"></i> Serial Port</label>
+        <input type="text" id="node-input-serial">
+    </div>
+</script>
+
+<script type="text/html" data-help-name="getValue">
+    <p>Working on it...</p>
+</script>
