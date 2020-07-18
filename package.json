@@ -1,5 +1,5 @@
 {
-  "name": "qm-hub-gpio-get-value",
+  "name": "qm-gpio-get-value",
   "version": "1.0.7",
   "description": "method for obtaining values ​​for gpio's",
   "main": "getValue.js",
