@@ -1,12 +1,12 @@
 <script type="text/javascript">
     RED.nodes.registerType('getValue',{
         category: 'GPIO Module',
-        color: '#98FB98',
+        color: '#FFFF00',
         defaults: {
             name:{
                 value: ""
             },
-            mapeamento:{ value:"", type: "mapping-get-value" },
+            mapeamento:{ value:"", type: "gpio-mapping" },
             gpio_number:{
                 value:""
             },
@@ -16,17 +16,42 @@
         },
         inputs:1,
         outputs:1,
-        icon: "Get_Value.svg",
-        label: function() { return this.name || "Get Value" },
+        icon: "Gpio.svg",
+        label: function() { return this.name? "Get Value - " + this.name:  "Get Value" },
         paletteLabel: "Get Value",
 
         oneditprepare: function() {
             var ports = []
             var self = this
-
-            $.getJSON('getValue',function(data) {
-                ports = data  
-                var portType = "custom";
+            var config_mapeamento = RED.nodes.node(this.mapeamento)
+            // console.log(config_mapeamento)
+            if(config_mapeamento){
+                ports = [
+                    {value:config_mapeamento.valuePort1, label: "GPA0_CN - " + config_mapeamento.labelPort1, hasValue:false},
+                    {value:config_mapeamento.valuePort2, label: "GPA1_CN - " + config_mapeamento.labelPort2, hasValue:false},
+                    {value:config_mapeamento.valuePort3, label: "GPA2_CN - " + config_mapeamento.labelPort3, hasValue:false},
+                    {value:config_mapeamento.valuePort4, label: "GPA3_CN - " + config_mapeamento.labelPort4, hasValue:false},
+                    {value:config_mapeamento.valuePort5, label: "GPA4_CN - " + config_mapeamento.labelPort5, hasValue:false},
+                    {value:config_mapeamento.valuePort6, label: "GPA5_CN - " + config_mapeamento.labelPort6, hasValue:false},
+                    {value:config_mapeamento.valuePort7, label: "GPA6_CN - " + config_mapeamento.labelPort7, hasValue:false},
+                    {value:config_mapeamento.valuePort8, label: "GPA7_CN - " + config_mapeamento.labelPort8, hasValue:false},
+                    {value:config_mapeamento.valuePort9, label: "GPA8_CN - " + config_mapeamento.labelPort9, hasValue:false},
+                    {value:config_mapeamento.valuePort10, label: "GPA9_CN - " + config_mapeamento.labelPort10, hasValue:false},
+                    {value:config_mapeamento.valuePort11, label: "GPA10_CN - " + config_mapeamento.labelPort11, hasValue:false},
+                    {value:config_mapeamento.valuePort12, label: "GPA11_CN - " + config_mapeamento.labelPort12, hasValue:false},
+                    {value:config_mapeamento.valuePort13, label: "GPB0_CN - " + config_mapeamento.labelPort13, hasValue:false},
+                    {value:config_mapeamento.valuePort14, label: "GPB1_CN - " + config_mapeamento.labelPort14, hasValue:false},
+                    {value:config_mapeamento.valuePort15, label: "GPB2_CN - " + config_mapeamento.labelPort15, hasValue:false},
+                    {value:config_mapeamento.valuePort16, label: "GPB3_CN - " + config_mapeamento.labelPort16, hasValue:false},
+                    {value:config_mapeamento.valuePort17, label: "GPB4_CN - " + config_mapeamento.labelPort17, hasValue:false},
+                    {value:config_mapeamento.valuePort18, label: "GPB5_CN - " + config_mapeamento.labelPort18, hasValue:false},
+                    {value:config_mapeamento.valuePort19, label: "GPB6_CN - " + config_mapeamento.labelPort19, hasValue:false},
+                    {value:config_mapeamento.valuePort20, label: "GPB7_CN - " + config_mapeamento.labelPort20, hasValue:false},
+                    {value:config_mapeamento.valuePort21, label: "GPB8_CN - " + config_mapeamento.labelPort21, hasValue:false},
+                    {value:config_mapeamento.valuePort22, label: "GPB9_CN - " + config_mapeamento.labelPort22, hasValue:false},
+                    {value:config_mapeamento.valuePort23, label: "GPB10_CN - " + config_mapeamento.labelPort23, hasValue:false},
+                    {value:config_mapeamento.valuePort24, label: "GPB11_CN - " + config_mapeamento.labelPort24, hasValue:false},
+                ];
                 for (var i in ports) {
                     if (self.gpio_number == ports[i].value) {
                         portType = self.gpio_number;
@@ -36,8 +61,44 @@
                     default: self.gpio_number,
                     types:ports
                 });
-            })
-            $("#node-input-mapeamento").val($("#node-input-mapeamento option:first").val());
+            }
+            else{
+                ports = [
+                    {label:"GPA0_CN", value: "0", hasValue:false},
+                    {label:"GPA1_CN", value: "1", hasValue:false},
+                    {label:"GPA2_CN", value: "2", hasValue:false},
+                    {label:"GPA3_CN", value: "3", hasValue:false},
+                    {label:"GPA4_CN", value: "4", hasValue:false},
+                    {label:"GPA5_CN", value: "5", hasValue:false},
+                    {label:"GPA6_CN", value: "6", hasValue:false},
+                    {label:"GPA7_CN", value: "7", hasValue:false},
+                    {label:"GPA8_CN", value: "8", hasValue:false},
+                    {label:"GPA9_CN", value: "9", hasValue:false},
+                    {label:"GPA10_CN", value: "10", hasValue:false},
+                    {label:"GPA11_CN", value: "11", hasValue:false},
+                    {label:"GPB0_CN", value: "12", hasValue:false},
+                    {label:"GPB1_CN", value: "13", hasValue:false},
+                    {label:"GPB2_CN", value: "14", hasValue:false},
+                    {label:"GPB3_CN", value: "15", hasValue:false},
+                    {label:"GPB4_CN", value: "16", hasValue:false},
+                    {label:"GPB5_CN", value: "17", hasValue:false},
+                    {label:"GPB6_CN", value: "18", hasValue:false},
+                    {label:"GPB7_CN", value: "19", hasValue:false},
+                    {label:"GPB8_CN", value: "20", hasValue:false},
+                    {label:"GPB9_CN", value: "21", hasValue:false},
+                    {label:"GPB10_CN", value: "22", hasValue:false},
+                    {label:"GPB11_CN", value: "23", hasValue:false},
+                ];
+                for (var i in ports) {
+                    if (self.gpio_number == ports[i].value) {
+                        portType = self.gpio_number;
+                    }
+                }
+                $("#node-config-input-port").typedInput({
+                    default: self.gpio_number,
+                    types:ports
+                });
+            }
         },
         oneditresize: function() {
             if(!$("#red-ui-header-button-deploy").hasClass("disabled")){
@@ -59,15 +120,15 @@
 
     select#node-input-mapeamento {
         width: 100%;
-        display: none;
+        display: block !important;
     }
 
     a#node-input-lookup-mapeamento {
-    position: absolute;
-    right: -30px !important;
-    top: 0px;
+        position: absolute;
+        right: 0px !important;
+        top: 0px;
     }
-
+    
     label{
         width: 50% !important;
         margin-bottom: 2px !important;
@@ -103,27 +164,26 @@
 <script type="text/html" data-template-name="getValue">
     <div class="form-row columm">
        <strong class="descript">
-        Get Value is used to read the value of a particular GPIO port.
+        Arrow as input and get the port value.
     </strong>
     </div>
 
     <div class="form-row columm">
         <label for="node-input-gpio_number" ><i class="fa fa-microchip"></i> GPIO number</label>
         <input type="text" id="node-config-input-port" style="width: 45%">
-        <div style="width:20px; margin-left: 204px; margin-top:-34px" selected>
-            <input type="text" id="node-input-mapeamento" placeholder="mapeamento">
-        </div>
     </div>
-
+    <div class="form-row">
+        <label for="node-input-mapeamento"><i class="fa fa-map"></i> Mapping</label>
+        <input type="text" id="node-input-mapeamento">
+    </div>
     <div class="form-row columm" style="margin-top: 20px !important;">
         <label for="node-input-gpio_number" ><i class="fa fa-microchip"></i> Compare </label>
-        <!-- <span for="node-input-val"><i class="fa fa-sign-out" aria-hidden="true"></i> Valor do GPIO</span> -->
         <select id="node-input-gpio_value" style="width:25%;" required>
-            <option value="true">True</option>
-            <option value="false">False</option>
+            <option value="true">High</option>
+            <option value="false">Low</option>
+            <option value="none">None</option>
         </select>
     </div>
-
 
     <div class="hr-div-get">
         <hr>
@@ -135,33 +195,8 @@
         <label style="width: 50% !important;" for="node-input-name" ><i class="fa fa-tag"></i> Component Nickname</label>
         <input type="text" id="node-input-name" placeholder="Name">
     </div>
-    <!-- <div class="form-row">
-        <label for="node-input-gpionum"><i class="fa fa-microchip" aria-hidden="true"></i> Numero do GPIO</label>
-        <select id="node-input-gpionum" style="width:18%">
-            <option value="0">GPA0_CN</option>
-            <option value="1">GPA1_CN</option>
-            <option value="2">GPA2_CN</option>
-            <option value="3">GPA3_CN</option>
-            <option value="4">GPA4_CN</option>
-            <option value="5">GPA5_CN</option>
-            <option value="6">GPA6_CN</option>
-            <option value="7">GPA7_CN</option>
-            <option value="8">GPA8_CN</option>
-            <option value="9">GPA9_CN</option>
-            <option value="10">GPA10_CN</option>
-            <option value="11">GPA11_CN</option>
-           
-        </select>
-        <div style="width:20px; margin-left:378px; margin-top:-34px" selected>
-            <input type="text" id="node-input-mapeamento" placeholder="mapeamento">
-        </div>
-    </div> -->
-    <!-- <div class="form-row node-input-serial">
-        <label for="node-input-serial" ><i class="fa fa-random"></i> Serial Port</label>
-        <input type="text" id="node-input-serial">
-    </div> -->
 </script>
 
 <script type="text/html" data-help-name="getValue">
-    <p>Working on it...</p>
+    <p>Arrow as input and get the port value.</p>
 </script>
