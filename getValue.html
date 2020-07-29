@@ -3,16 +3,40 @@
         category: 'GPIO Module',
         color: '#FFFF00',
         defaults: {
-            name:{
-                value: ""
-            },
+            name:{value: ""},
             mapeamento:{ value:"", type: "gpio-mapping" },
-            gpio_number:{
-                value:""
-            },
-            gpio_value:{
-                value: ""
-            }
+            gpio_number:{value:""},
+            gpio_value:{value: ""},
+
+            qtdGpio:{value:0},
+            controle:{value:0},
+
+            // val:{value:"false"}, gpio_number:{value:""},
+            val1:{value:"false"}, gpio_number1:{value:""},
+            val2:{value:"false"}, gpio_number2:{value:""},
+            val3:{value:"false"}, gpio_number3:{value:""},
+            val4:{value:"false"}, gpio_number4:{value:""},
+            val5:{value:"false"}, gpio_number5:{value:""},
+            val6:{value:"false"}, gpio_number6:{value:""},
+            val7:{value:"false"}, gpio_number7:{value:""},
+            val8:{value:"false"}, gpio_number8:{value:""},
+            val9:{value:"false"}, gpio_number9:{value:""},
+            val10:{value:"false"}, gpio_number10:{value:""},
+            val11:{value:"false"}, gpio_number11:{value:""},
+            val12:{value:"false"}, gpio_number12:{value:""},
+            val13:{value:"false"}, gpio_number13:{value:""},
+            val14:{value:"false"}, gpio_number14:{value:""},
+            val15:{value:"false"}, gpio_number15:{value:""},
+            val16:{value:"false"}, gpio_number16:{value:""},
+            val17:{value:"false"}, gpio_number17:{value:""},
+            val18:{value:"false"}, gpio_number18:{value:""},
+            val19:{value:"false"}, gpio_number19:{value:""},
+            val20:{value:"false"}, gpio_number20:{value:""},
+            val21:{value:"false"}, gpio_number21:{value:""},
+            val22:{value:"false"}, gpio_number22:{value:""},
+            val23:{value:"false"}, gpio_number23:{value:""},
+            val24:{value:"false"}, gpio_number24:{value:""},
+
         },
         inputs:1,
         outputs:1,
@@ -21,8 +45,30 @@
         paletteLabel: "Get Value",
 
         oneditprepare: function() {
-            var ports = []
             var self = this
+            self.controle = self.qtdGpio;
+
+            for(var i=1; i<=self.controle; i++){
+                $(".gpio"+i).show();
+            }
+            if(!self.controle || self.controle < 0){
+                self.controle = 0;
+            }
+            $("#addGpio").click(function(){
+                self.controle = self.controle+1 <= 24 ? self.controle + 1 : 24;
+
+                $(".gpio"+self.controle).show();
+                console.log(self.controle);
+            });
+            $("#remGpio").click(function(){
+                $(".gpio"+self.controle).hide();
+                self.controle = self.controle-1 >= 0 ? self.controle - 1 : 0;
+                console.log(self.controle);
+            });
+
+
+            var ports = []
+            // var self = this
             var config_mapeamento = RED.nodes.node(this.mapeamento)
             // console.log(config_mapeamento)
             if(config_mapeamento){
@@ -52,15 +98,7 @@
                     {value:config_mapeamento.valuePort23, label: "GPB10_CN - " + config_mapeamento.labelPort23, hasValue:false},
                     {value:config_mapeamento.valuePort24, label: "GPB11_CN - " + config_mapeamento.labelPort24, hasValue:false},
                 ];
-                for (var i in ports) {
-                    if (self.gpio_number == ports[i].value) {
-                        portType = self.gpio_number;
-                    }
-                }
-                $("#node-config-input-port").typedInput({
-                    default: self.gpio_number,
-                    types:ports
-                });
+                
             }
             else{
                 ports = [
@@ -89,16 +127,107 @@
                     {label:"GPB10_CN", value: "22", hasValue:false},
                     {label:"GPB11_CN", value: "23", hasValue:false},
                 ];
-                for (var i in ports) {
-                    if (self.gpio_number == ports[i].value) {
-                        portType = self.gpio_number;
-                    }
-                }
-                $("#node-config-input-port").typedInput({
-                    default: self.gpio_number,
-                    types:ports
-                });
             }
+            $("#node-config-input-port").typedInput({
+                default: self.gpio_number,
+                types:ports
+            });
+            $("#node-config-input-port1").typedInput({
+                default: self.gpio_number1,
+                types:ports
+            });
+            $("#node-config-input-port2").typedInput({
+                default: self.gpio_number2,
+                types:ports
+            });
+            $("#node-config-input-port3").typedInput({
+                default: self.gpio_number3,
+                types:ports
+            });
+            $("#node-config-input-port4").typedInput({
+                default: self.gpio_number4,
+                types:ports
+            });
+            $("#node-config-input-port5").typedInput({
+                default: self.gpio_number5,
+                types:ports
+            });
+            $("#node-config-input-port6").typedInput({
+                default: self.gpio_number6,
+                types:ports
+            });
+            $("#node-config-input-port7").typedInput({
+                default: self.gpio_number7,
+                types:ports
+            });
+            $("#node-config-input-port8").typedInput({
+                default: self.gpio_number8,
+                types:ports
+            });
+            $("#node-config-input-port9").typedInput({
+                default: self.gpio_number9,
+                types:ports
+            });
+            $("#node-config-input-port10").typedInput({
+                default: self.gpio_number10,
+                types:ports
+            });
+            $("#node-config-input-port11").typedInput({
+                default: self.gpio_number11,
+                types:ports
+            });
+            $("#node-config-input-port12").typedInput({
+                default: self.gpio_number12,
+                types:ports
+            });
+            $("#node-config-input-port13").typedInput({
+                default: self.gpio_number13,
+                types:ports
+            });
+            $("#node-config-input-port14").typedInput({
+                default: self.gpio_number14,
+                types:ports
+            });
+            $("#node-config-input-port15").typedInput({
+                default: self.gpio_number15,
+                types:ports
+            });
+            $("#node-config-input-port16").typedInput({
+                default: self.gpio_number16,
+                types:ports
+            });
+            $("#node-config-input-port17").typedInput({
+                default: self.gpio_number17,
+                types:ports
+            });
+            $("#node-config-input-port18").typedInput({
+                default: self.gpio_number18,
+                types:ports
+            });
+            $("#node-config-input-port19").typedInput({
+                default: self.gpio_number19,
+                types:ports
+            });
+            $("#node-config-input-port20").typedInput({
+                default: self.gpio_number20,
+                types:ports
+            });
+            $("#node-config-input-port21").typedInput({
+                default: self.gpio_number21,
+                types:ports
+            });
+            $("#node-config-input-port22").typedInput({
+                default: self.gpio_number22,
+                types:ports
+            });
+            $("#node-config-input-port23").typedInput({
+                default: self.gpio_number23,
+                types:ports
+            });
+            $("#node-config-input-port24").typedInput({
+                default: self.gpio_number24,
+                types:ports
+            });
         },
         oneditresize: function() {
             if(!$("#red-ui-header-button-deploy").hasClass("disabled")){
@@ -109,9 +238,108 @@
         },
         oneditsave: function() {
             var mytype = $("#node-config-input-port").typedInput('type');
+            var mytype1 = $("#node-config-input-port1").typedInput('type');
+            var mytype2 = $("#node-config-input-port2").typedInput('type');
+            var mytype3 = $("#node-config-input-port3").typedInput('type');
+            var mytype4 = $("#node-config-input-port4").typedInput('type');
+            var mytype5 = $("#node-config-input-port5").typedInput('type');
+            var mytype6 = $("#node-config-input-port6").typedInput('type');
+            var mytype7 = $("#node-config-input-port7").typedInput('type');
+            var mytype8 = $("#node-config-input-port8").typedInput('type');
+            var mytype9 = $("#node-config-input-port9").typedInput('type');
+            var mytype10 = $("#node-config-input-port10").typedInput('type');
+            var mytype11 = $("#node-config-input-port11").typedInput('type');
+            var mytype12 = $("#node-config-input-port12").typedInput('type');
+            var mytype13 = $("#node-config-input-port13").typedInput('type');
+            var mytype14 = $("#node-config-input-port14").typedInput('type');
+            var mytype15 = $("#node-config-input-port15").typedInput('type');
+            var mytype16 = $("#node-config-input-port16").typedInput('type');
+            var mytype17 = $("#node-config-input-port17").typedInput('type');
+            var mytype18 = $("#node-config-input-port18").typedInput('type');
+            var mytype19 = $("#node-config-input-port19").typedInput('type');
+            var mytype20 = $("#node-config-input-port20").typedInput('type');
+            var mytype21 = $("#node-config-input-port21").typedInput('type');
+            var mytype22 = $("#node-config-input-port22").typedInput('type');
+            var mytype23 = $("#node-config-input-port23").typedInput('type');
+            var mytype24 = $("#node-config-input-port24").typedInput('type');
 
             $("#node-config-input-port").typedInput('value', mytype);
             this.gpio_number = $("#node-config-input-port").typedInput('value');
+
+            $("#node-config-input-port1").typedInput('value', mytype1);
+            this.gpio_number1 = $("#node-config-input-port1").typedInput('value');
+
+            $("#node-config-input-port2").typedInput('value', mytype2);
+            this.gpio_number2 = $("#node-config-input-port2").typedInput('value');
+
+            $("#node-config-input-port3").typedInput('value', mytype3);
+            this.gpio_number3 = $("#node-config-input-port3").typedInput('value');
+
+            $("#node-config-input-port4").typedInput('value', mytype4);
+            this.gpio_number4 = $("#node-config-input-port4").typedInput('value');
+
+            $("#node-config-input-port5").typedInput('value', mytype5);
+            this.gpio_number5 = $("#node-config-input-port5").typedInput('value');
+
+            $("#node-config-input-port6").typedInput('value', mytype6);
+            this.gpio_number6 = $("#node-config-input-port6").typedInput('value');
+
+            $("#node-config-input-port7").typedInput('value', mytype7);
+            this.gpio_number7 = $("#node-config-input-port7").typedInput('value');
+
+            $("#node-config-input-port8").typedInput('value', mytype8);
+            this.gpio_number8 = $("#node-config-input-port8").typedInput('value');
+            
+            $("#node-config-input-port9").typedInput('value', mytype9);
+            this.gpio_number9 = $("#node-config-input-port9").typedInput('value');
+            
+            $("#node-config-input-port10").typedInput('value', mytype10);
+            this.gpio_number10 = $("#node-config-input-port10").typedInput('value');
+            
+            $("#node-config-input-port11").typedInput('value', mytype11);
+            this.gpio_number11 = $("#node-config-input-port11").typedInput('value');
+            
+            $("#node-config-input-port12").typedInput('value', mytype12);
+            this.gpio_number12 = $("#node-config-input-port12").typedInput('value');
+            
+            $("#node-config-input-port13").typedInput('value', mytype13);
+            this.gpio_number13 = $("#node-config-input-port13").typedInput('value');
+            
+            $("#node-config-input-port14").typedInput('value', mytype14);
+            this.gpio_number14 = $("#node-config-input-port14").typedInput('value');
+            
+            $("#node-config-input-port15").typedInput('value', mytype15);
+            this.gpio_number15 = $("#node-config-input-port15").typedInput('value');
+            
+            $("#node-config-input-port16").typedInput('value', mytype16);
+            this.gpio_number16 = $("#node-config-input-port16").typedInput('value');
+            
+            $("#node-config-input-port17").typedInput('value', mytype17);
+            this.gpio_number17 = $("#node-config-input-port17").typedInput('value');
+            
+            $("#node-config-input-port18").typedInput('value', mytype18);
+            this.gpio_number18 = $("#node-config-input-port18").typedInput('value');
+            
+            $("#node-config-input-port19").typedInput('value', mytype19);
+            this.gpio_number19 = $("#node-config-input-port19").typedInput('value');
+            
+            $("#node-config-input-port20").typedInput('value', mytype20);
+            this.gpio_number20 = $("#node-config-input-port20").typedInput('value');
+            
+            $("#node-config-input-port21").typedInput('value', mytype21);
+            this.gpio_number21 = $("#node-config-input-port21").typedInput('value');
+            
+            $("#node-config-input-port22").typedInput('value', mytype22);
+            this.gpio_number22 = $("#node-config-input-port22").typedInput('value');
+            
+            $("#node-config-input-port23").typedInput('value', mytype23);
+            this.gpio_number23 = $("#node-config-input-port23").typedInput('value');
+            
+            $("#node-config-input-port24").typedInput('value', mytype24);
+            this.gpio_number24 = $("#node-config-input-port24").typedInput('value');
+            
+
+            this.qtdGpio = this.controle;
         }
     });
 </script>
@@ -130,13 +358,35 @@
     }
     
     label{
-        width: 50% !important;
+        width: 100% !important;
         margin-bottom: 2px !important;
     }
 
     .columm{
         display: flex !important;
         flex-direction: column !important;
+    }
+
+    .columm-50{
+        display: flex !important;
+        flex-direction: column !important;
+        width: 50% !important;
+        float: left !important;
+    }
+
+    .columm-30{
+        display: flex !important;
+        flex-direction: column !important;
+        width: 30% !important;
+        float: left !important;
+    }
+
+
+    .columm-70{
+        display: flex !important;
+        flex-direction: column !important;
+        width: 70% !important;
+        float: left !important;
     }
 
     hr {
@@ -159,44 +409,605 @@
         text-align: center;
     }
 
-</style>
+
+    .descript-div{
+        max-width: 444px !important;
+    }
+
+    span.red-ui-typedInput-type-label {
+    /* background: chartreuse; */
+    /* display: block; */
+    width: 250px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    }
+
+    .btn-aln{
+        display: flex !important;
+        flex-direction: row-reverse !important;
+        /* padding-left: 30px; */
+        align-content: center;
+        align-items: flex-end;
+    }
+
+</style>    
+
 
 <script type="text/html" data-template-name="getValue">
-    <div class="form-row columm">
+    <div class="form-row columm descript-div">
        <strong class="descript">
-        Arrow as input and get the port value.
-    </strong>
+        Assign as input and get the port value.
+        </strong>
     </div>
 
-    <div class="form-row columm">
-        <label for="node-input-gpio_number" ><i class="fa fa-microchip"></i> GPIO number</label>
-        <input type="text" id="node-config-input-port" style="width: 45%">
+    <div style=" position: relative; display:flex;">
+        <div class="form-row columm-70">
+            <label style="width: 50% !important;" for="node-input-name" ><i class="fa fa-tag"></i> Identification Note</label>
+            <input type="text" id="node-input-name" placeholder="Name" style="width: 100%">
+        </div>
+        <div class="form-row columm-30" style="align-items: flex-end !important;">
+            <label style="width: max-content !important; padding-right: 24px;"><i class="fa fa-list-ul"></i> Item</label>
+            <div class="form-row btn-aln" >
+                <a id="addGpio" class="red-ui-button" ><i class="fa fa-plus"></i></a>
+                <a id="remGpio" class="red-ui-button" style="margin-right: 5px;" ><i class="fa fa-minus"></i></a>
+            </div>
+        </div>
     </div>
+    <!-- <div style=" position: relative; display:flex;">
+        <div class="form-row columm-70">
+            <label style="width: 50% !important;" for="node-input-name" ><i class="fa fa-tag"></i> Identification Note</label>
+            <input type="text" id="node-input-name" placeholder="Name" style="width: 100%">
+        </div>
+        <div class="form-row columm" >
+            <label style="padding-left: 30px;"><i class="fa fa-list-ul"></i> Item</label>
+            <div class="form-row btn-aln" >
+                <a id="addGpio" class="red-ui-button" ><i class="fa fa-plus"></i></a>
+                <a id="remGpio" class="red-ui-button" style="margin-right: 5px;" ><i class="fa fa-minus"></i></a>
+            </div>
+        </div>
+    </div> -->
+
+    <div class="hr-div-gp">
+        <hr>
+        <span class="optional">GPIO 0</span>
+        <hr>
+    </div>
+    <div style=" position: relative; display:flex;">
+        <div class="form-row columm-70">
+            <label for="node-input-gpio_number" ><i class="fa fa-microchip"></i> GPIO number</label>
+            <input type="text" id="node-config-input-port" style="width: 100%">
+        </div>
+    
+        <div class="form-row columm-30" style="padding-left: 10px;">
+            <label for="node-input-gpio_number" ><i class="fa fa-microchip"></i> Compare </label>
+            <select id="node-input-gpio_value" style="width:100%;" required>
+                <option value="true">High</option>
+                <option value="false">Low</option>
+                <option value="none">None</option>
+            </select>
+        </div>
+    </div>
+
     <div class="form-row">
-        <label for="node-input-mapeamento"><i class="fa fa-map"></i> Mapping</label>
+        <label for="node-input-mapeamento"><i class="fa fa-map"></i> PCI Connection Map</label>
         <input type="text" id="node-input-mapeamento">
     </div>
-    <div class="form-row columm" style="margin-top: 20px !important;">
-        <label for="node-input-gpio_number" ><i class="fa fa-microchip"></i> Compare </label>
-        <select id="node-input-gpio_value" style="width:25%;" required>
-            <option value="true">High</option>
-            <option value="false">Low</option>
-            <option value="none">None</option>
-        </select>
+
+    <div class="form-row gpio1" style="display: none;">
+        <div class="hr-div-gp">
+            <hr>
+            <span class="optional">GPIO 1</span>
+            <hr>
+        </div>
+        <div style=" position: relative; display:flex;">
+            <div class="form-row columm-70">
+                <label for="node-input-gpio_number1" ><i class="fa fa-microchip"></i> GPIO number</label>
+                <input type="text" id="node-config-input-port1" style="width: 100%">
+            </div>
+            <div class="form-row columm-30" style="padding-left: 10px;">
+                <label for="node-input-gpio_number1" ><i class="fa fa-microchip"></i> Compare</label>
+                <select id="node-input-val1" style="width:100%;">
+                    <option value="true">High</option>
+                    <option value="false">Low</option>
+                    <option value="none">None</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="form-row gpio2" style="display: none;">
+        <div class="hr-div-gp">
+            <hr>
+            <span class="optional">GPIO 2</span>
+            <hr>
+        </div>
+        <div style=" position: relative; display:flex;">
+            <div class="form-row columm-70">
+                <label for="node-input-gpio_number2" ><i class="fa fa-microchip"></i> GPIO number</label>
+                <input type="text" id="node-config-input-port2" style="width: 100%">
+            </div>
+            <div class="form-row columm-30" style="padding-left: 10px;">
+                <label for="node-input-gpio_number2" ><i class="fa fa-microchip"></i> Compare</label>
+                <select id="node-input-val2" style="width:100%;">
+                    <option value="true">High</option>
+                    <option value="false">Low</option>
+                    <option value="none">None</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="form-row gpio3" style="display: none;">
+        <div class="hr-div-gp">
+            <hr>
+            <span class="optional">GPIO 3</span>
+            <hr>
+        </div>
+        <div style=" position: relative; display:flex;">
+            <div class="form-row columm-70">
+                <label for="node-input-gpio_number3" ><i class="fa fa-microchip"></i> GPIO number</label>
+                <input type="text" id="node-config-input-port3" style="width: 100%">
+            </div>
+            <div class="form-row columm-30" style="padding-left: 10px;">
+                <label for="node-input-gpio_number3" ><i class="fa fa-microchip"></i> Compare</label>
+                <select id="node-input-val3" style="width:100%;">
+                    <option value="true">High</option>
+                    <option value="false">Low</option>
+                    <option value="none">None</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="form-row gpio4" style="display: none;">
+        <div class="hr-div-gp">
+            <hr>
+            <span class="optional">GPIO 4</span>
+            <hr>
+        </div>
+        <div style=" position: relative; display:flex;">
+            <div class="form-row columm-70">
+                <label for="node-input-gpio_number4" ><i class="fa fa-microchip"></i> GPIO number</label>
+                <input type="text" id="node-config-input-port4" style="width: 100%">
+            </div>
+            <div class="form-row columm-30" style="padding-left: 10px;">
+                <label for="node-input-gpio_number4" ><i class="fa fa-microchip"></i> Compare</label>
+                <select id="node-input-val4" style="width:100%;">
+                    <option value="true">High</option>
+                    <option value="false">Low</option>
+                    <option value="none">None</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="form-row gpio5" style="display: none;">
+        <div class="hr-div-gp">
+            <hr>
+            <span class="optional">GPIO 5</span>
+            <hr>
+        </div>
+        <div style=" position: relative; display:flex;">
+            <div class="form-row columm-70">
+                <label for="node-input-gpio_number5" ><i class="fa fa-microchip"></i> GPIO number</label>
+                <input type="text" id="node-config-input-port5" style="width: 100%">
+            </div>
+            <div class="form-row columm-30" style="padding-left: 10px;">
+                <label for="node-input-gpio_number5" ><i class="fa fa-microchip"></i> Compare</label>
+                <select id="node-input-val5" style="width:100%;">
+                    <option value="true">High</option>
+                    <option value="false">Low</option>
+                    <option value="none">None</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="form-row gpio6" style="display: none;">
+        <div class="hr-div-gp">
+            <hr>
+            <span class="optional">GPIO 6</span>
+            <hr>
+        </div>
+        <div style=" position: relative; display:flex;">
+            <div class="form-row columm-70">
+                <label for="node-input-gpio_number6" ><i class="fa fa-microchip"></i> GPIO number</label>
+                <input type="text" id="node-config-input-port6" style="width: 100%">
+            </div>
+            <div class="form-row columm-30" style="padding-left: 10px;">
+                <label for="node-input-gpio_number6" ><i class="fa fa-microchip"></i> Compare</label>
+                <select id="node-input-val6" style="width:100%;">
+                    <option value="true">High</option>
+                    <option value="false">Low</option>
+                    <option value="none">None</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="form-row gpio7" style="display: none;">
+        <div class="hr-div-gp">
+            <hr>
+            <span class="optional">GPIO 7</span>
+            <hr>
+        </div>
+        <div style=" position: relative; display:flex;">
+            <div class="form-row columm-70">
+                <label for="node-input-gpio_number7" ><i class="fa fa-microchip"></i> GPIO number</label>
+                <input type="text" id="node-config-input-port7" style="width: 100%">
+            </div>
+            <div class="form-row columm-30" style="padding-left: 10px;">
+                <label for="node-input-gpio_number7" ><i class="fa fa-microchip"></i> Compare</label>
+                <select id="node-input-val7" style="width:100%;">
+                    <option value="true">High</option>
+                    <option value="false">Low</option>
+                    <option value="none">None</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="form-row gpio8" style="display: none;">
+        <div class="hr-div-gp">
+            <hr>
+            <span class="optional">GPIO 8</span>
+            <hr>
+        </div>
+        <div style=" position: relative; display:flex;">
+            <div class="form-row columm-70">
+                <label for="node-input-gpio_number8" ><i class="fa fa-microchip"></i> GPIO number</label>
+                <input type="text" id="node-config-input-port8" style="width: 100%">
+            </div>
+            <div class="form-row columm-30" style="padding-left: 10px;">
+                <label for="node-input-gpio_number8" ><i class="fa fa-microchip"></i> Compare</label>
+                <select id="node-input-val8" style="width:100%;">
+                    <option value="true">High</option>
+                    <option value="false">Low</option>
+                    <option value="none">None</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="form-row gpio9" style="display: none;">
+        <div class="hr-div-gp">
+            <hr>
+            <span class="optional">GPIO 9</span>
+            <hr>
+        </div>
+        <div style=" position: relative; display:flex;">
+            <div class="form-row columm-70">
+                <label for="node-input-gpio_number9" ><i class="fa fa-microchip"></i> GPIO number</label>
+                <input type="text" id="node-config-input-port9" style="width: 100%">
+            </div>
+            <div class="form-row columm-30" style="padding-left: 10px;">
+                <label for="node-input-gpio_number9" ><i class="fa fa-microchip"></i> Compare</label>
+                <select id="node-input-val9" style="width:100%;">
+                    <option value="true">High</option>
+                    <option value="false">Low</option>
+                    <option value="none">None</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="form-row gpio10" style="display: none;">
+        <div class="hr-div-gp">
+            <hr>
+            <span class="optional">GPIO 10</span>
+            <hr>
+        </div>
+        <div style=" position: relative; display:flex;">
+            <div class="form-row columm-70">
+                <label for="node-input-gpio_number10" ><i class="fa fa-microchip"></i> GPIO number</label>
+                <input type="text" id="node-config-input-port10" style="width: 100%">
+            </div>
+            <div class="form-row columm-30" style="padding-left: 10px;">
+                <label for="node-input-gpio_number10" ><i class="fa fa-microchip"></i> Compare</label>
+                <select id="node-input-val10" style="width:100%;">
+                    <option value="true">High</option>
+                    <option value="false">Low</option>
+                    <option value="none">None</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="form-row gpio11" style="display: none;">
+        <div class="hr-div-gp">
+            <hr>
+            <span class="optional">GPIO 11</span>
+            <hr>
+        </div>
+        <div style=" position: relative; display:flex;">
+            <div class="form-row columm-70">
+                <label for="node-input-gpio_number11" ><i class="fa fa-microchip"></i> GPIO number</label>
+                <input type="text" id="node-config-input-port11" style="width: 100%">
+            </div>
+            <div class="form-row columm-30" style="padding-left: 10px;">
+                <label for="node-input-gpio_number11" ><i class="fa fa-microchip"></i> Compare</label>
+                <select id="node-input-val11" style="width:100%;">
+                    <option value="true">High</option>
+                    <option value="false">Low</option>
+                    <option value="none">None</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="form-row gpio12" style="display: none;">
+        <div class="hr-div-gp">
+            <hr>
+            <span class="optional">GPIO 12</span>
+            <hr>
+        </div>
+        <div style=" position: relative; display:flex;">
+            <div class="form-row columm-70">
+                <label for="node-input-gpio_number12" ><i class="fa fa-microchip"></i> GPIO number</label>
+                <input type="text" id="node-config-input-port12" style="width: 100%">
+            </div>
+            <div class="form-row columm-30" style="padding-left: 10px;">
+                <label for="node-input-gpio_number12" ><i class="fa fa-microchip"></i> Compare</label>
+                <select id="node-input-val12" style="width:100%;">
+                    <option value="true">High</option>
+                    <option value="false">Low</option>
+                    <option value="none">None</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="form-row gpio13" style="display: none;">
+        <div class="hr-div-gp">
+            <hr>
+            <span class="optional">GPIO 13</span>
+            <hr>
+        </div>
+        <div style=" position: relative; display:flex;">
+            <div class="form-row columm-70">
+                <label for="node-input-gpio_number13" ><i class="fa fa-microchip"></i> GPIO number</label>
+                <input type="text" id="node-config-input-port13" style="width: 100%">
+            </div>
+            <div class="form-row columm-30" style="padding-left: 10px;">
+                <label for="node-input-gpio_number13" ><i class="fa fa-microchip"></i> Compare</label>
+                <select id="node-input-val13" style="width:100%;">
+                    <option value="true">High</option>
+                    <option value="false">Low</option>
+                    <option value="none">None</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="form-row gpio14" style="display: none;">
+        <div class="hr-div-gp">
+            <hr>
+            <span class="optional">GPIO 14</span>
+            <hr>
+        </div>
+        <div style=" position: relative; display:flex;">
+            <div class="form-row columm-70">
+                <label for="node-input-gpio_number14" ><i class="fa fa-microchip"></i> GPIO number</label>
+                <input type="text" id="node-config-input-port14" style="width: 100%">
+            </div>
+            <div class="form-row columm-30" style="padding-left: 10px;">
+                <label for="node-input-gpio_number14" ><i class="fa fa-microchip"></i> Compare</label>
+                <select id="node-input-val14" style="width:100%;">
+                    <option value="true">High</option>
+                    <option value="false">Low</option>
+                    <option value="none">None</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="form-row gpio15" style="display: none;">
+        <div class="hr-div-gp">
+            <hr>
+            <span class="optional">GPIO 15</span>
+            <hr>
+        </div>
+        <div style=" position: relative; display:flex;">
+            <div class="form-row columm-70">
+                <label for="node-input-gpio_number15" ><i class="fa fa-microchip"></i> GPIO number</label>
+                <input type="text" id="node-config-input-port15" style="width: 100%">
+            </div>
+            <div class="form-row columm-30" style="padding-left: 10px;">
+                <label for="node-input-gpio_number15" ><i class="fa fa-microchip"></i> Compare</label>
+                <select id="node-input-val15" style="width:100%;">
+                    <option value="true">High</option>
+                    <option value="false">Low</option>
+                    <option value="none">None</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="form-row gpio16" style="display: none;">
+        <div class="hr-div-gp">
+            <hr>
+            <span class="optional">GPIO 16</span>
+            <hr>
+        </div>
+        <div style=" position: relative; display:flex;">
+            <div class="form-row columm-70">
+                <label for="node-input-gpio_number16" ><i class="fa fa-microchip"></i> GPIO number</label>
+                <input type="text" id="node-config-input-port16" style="width: 100%">
+            </div>
+            <div class="form-row columm-30" style="padding-left: 10px;">
+                <label for="node-input-gpio_number16" ><i class="fa fa-microchip"></i> Compare</label>
+                <select id="node-input-val16" style="width:100%;">
+                    <option value="true">High</option>
+                    <option value="false">Low</option>
+                    <option value="none">None</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="form-row gpio17" style="display: none;">
+        <div class="hr-div-gp">
+            <hr>
+            <span class="optional">GPIO 17</span>
+            <hr>
+        </div>
+        <div style=" position: relative; display:flex;">
+            <div class="form-row columm-70">
+                <label for="node-input-gpio_number17" ><i class="fa fa-microchip"></i> GPIO number</label>
+                <input type="text" id="node-config-input-port17" style="width: 100%">
+            </div>
+            <div class="form-row columm-30" style="padding-left: 10px;">
+                <label for="node-input-gpio_number17" ><i class="fa fa-microchip"></i> Compare</label>
+                <select id="node-input-val17" style="width:100%;">
+                    <option value="true">High</option>
+                    <option value="false">Low</option>
+                    <option value="none">None</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="form-row gpio18" style="display: none;">
+        <div class="hr-div-gp">
+            <hr>
+            <span class="optional">GPIO 18</span>
+            <hr>
+        </div>
+        <div style=" position: relative; display:flex;">
+            <div class="form-row columm-70">
+                <label for="node-input-gpio_number18" ><i class="fa fa-microchip"></i> GPIO number</label>
+                <input type="text" id="node-config-input-port18" style="width: 100%">
+            </div>
+            <div class="form-row columm-30" style="padding-left: 10px;">
+                <label for="node-input-gpio_number18" ><i class="fa fa-microchip"></i> Compare</label>
+                <select id="node-input-val18" style="width:100%;">
+                    <option value="true">High</option>
+                    <option value="false">Low</option>
+                    <option value="none">None</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="form-row gpio19" style="display: none;">
+        <div class="hr-div-gp">
+            <hr>
+            <span class="optional">GPIO 19</span>
+            <hr>
+        </div>
+        <div style=" position: relative; display:flex;">
+            <div class="form-row columm-70">
+                <label for="node-input-gpio_number19" ><i class="fa fa-microchip"></i> GPIO number</label>
+                <input type="text" id="node-config-input-port19" style="width: 100%">
+            </div>
+            <div class="form-row columm-30" style="padding-left: 10px;">
+                <label for="node-input-gpio_number19" ><i class="fa fa-microchip"></i> Compare</label>
+                <select id="node-input-val19" style="width:100%;">
+                    <option value="true">High</option>
+                    <option value="false">Low</option>
+                    <option value="none">None</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="form-row gpio20" style="display: none;">
+        <div class="hr-div-gp">
+            <hr>
+            <span class="optional">GPIO 20</span>
+            <hr>
+        </div>
+        <div style=" position: relative; display:flex;">
+            <div class="form-row columm-70">
+                <label for="node-input-gpio_number20" ><i class="fa fa-microchip"></i> GPIO number</label>
+                <input type="text" id="node-config-input-port20" style="width: 100%">
+            </div>
+            <div class="form-row columm-30" style="padding-left: 10px;">
+                <label for="node-input-gpio_number20" ><i class="fa fa-microchip"></i> Compare</label>
+                <select id="node-input-val20" style="width:100%;">
+                    <option value="true">High</option>
+                    <option value="false">Low</option>
+                    <option value="none">None</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="form-row gpio21" style="display: none;">
+        <div class="hr-div-gp">
+            <hr>
+            <span class="optional">GPIO 21</span>
+            <hr>
+        </div>
+        <div style=" position: relative; display:flex;">
+            <div class="form-row columm-70">
+                <label for="node-input-gpio_number21" ><i class="fa fa-microchip"></i> GPIO number</label>
+                <input type="text" id="node-config-input-port21" style="width: 100%">
+            </div>
+            <div class="form-row columm-30" style="padding-left: 10px;">
+                <label for="node-input-gpio_number21" ><i class="fa fa-microchip"></i> Compare</label>
+                <select id="node-input-val21" style="width:100%;">
+                    <option value="true">High</option>
+                    <option value="false">Low</option>
+                    <option value="none">None</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="form-row gpio22" style="display: none;">
+        <div class="hr-div-gp">
+            <hr>
+            <span class="optional">GPIO 22</span>
+            <hr>
+        </div>
+        <div style=" position: relative; display:flex;">
+            <div class="form-row columm-70">
+                <label for="node-input-gpio_number22" ><i class="fa fa-microchip"></i> GPIO number</label>
+                <input type="text" id="node-config-input-port22" style="width: 100%">
+            </div>
+            <div class="form-row columm-30" style="padding-left: 10px;">
+                <label for="node-input-gpio_number22" ><i class="fa fa-microchip"></i> Compare</label>
+                <select id="node-input-val22" style="width:100%;">
+                    <option value="true">High</option>
+                    <option value="false">Low</option>
+                    <option value="none">None</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="form-row gpio23" style="display: none;">
+        <div class="hr-div-gp">
+            <hr>
+            <span class="optional">GPIO 23</span>
+            <hr>
+        </div>
+        <div style=" position: relative; display:flex;">
+            <div class="form-row columm-70">
+                <label for="node-input-gpio_number23" ><i class="fa fa-microchip"></i> GPIO number</label>
+                <input type="text" id="node-config-input-port23" style="width: 100%">
+            </div>
+            <div class="form-row columm-30" style="padding-left: 10px;">
+                <label for="node-input-gpio_number23" ><i class="fa fa-microchip"></i> Compare</label>
+                <select id="node-input-val23" style="width:100%;">
+                    <option value="true">High</option>
+                    <option value="false">Low</option>
+                    <option value="none">None</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="form-row gpio24" style="display: none;">
+        <div class="hr-div-gp">
+            <hr>
+            <span class="optional">GPIO 24</span>
+            <hr>
+        </div>
+        <div style=" position: relative; display:flex;">
+            <div class="form-row columm-70">
+                <label for="node-input-gpio_number24" ><i class="fa fa-microchip"></i> GPIO number</label>
+                <input type="text" id="node-config-input-port24" style="width: 100%">
+            </div>
+            <div class="form-row columm-30" style="padding-left: 10px;">
+                <label for="node-input-gpio_number24" ><i class="fa fa-microchip"></i> Compare</label>
+                <select id="node-input-val24" style="width:100%;">
+                    <option value="true">High</option>
+                    <option value="false">Low</option>
+                    <option value="none">None</option>
+                </select>
+            </div>
+        </div>
     </div>
 
-    <div class="hr-div-get">
+    <!-- <div class="hr-div-get">
         <hr>
         <span class="optional">Optional</span>
         <hr>
-    </div>
+    </div> -->
 
-    <div class="form-row columm">
-        <label style="width: 50% !important;" for="node-input-name" ><i class="fa fa-tag"></i> Component Nickname</label>
-        <input type="text" id="node-input-name" placeholder="Name">
-    </div>
+   
 </script>
 
 <script type="text/html" data-help-name="getValue">
-    <p>Arrow as input and get the port value.</p>
+    <p>Assign as input and get the port value.</p>
 </script>
