@@ -1,6 +1,6 @@
 {
   "name": "qm-gpio-get-value",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "method for obtaining values ​​for gpio's",
   "main": "getValue.js",
   "scripts": {
