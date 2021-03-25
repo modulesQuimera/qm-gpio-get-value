@@ -4,7 +4,6 @@ module.exports = function(RED) {
     var mapeamentoNode;
 
     function multipleGpio(self, file, slot, currentMode){
-        console.log(self)
         for(var k=0; k<self.qtdGpio; k++){
             var cmd = {
                 type: "GPIO_modular_V1_0",
@@ -109,14 +108,12 @@ module.exports = function(RED) {
             }
             globalContext.set("exportFile", file);
             send(msg);
-            console.log(command);
         });
     }
 
     RED.nodes.registerType("getValue", getValueNode);
 
     // RED.httpAdmin.get("/getValue",function(req,res) {
-    //     console.log(mapeamentoNode);
     //     if(mapeamentoNode){
     //         res.json([
     //             {value:mapeamentoNode.valuePort1, label: "GPA0_CN - " + mapeamentoNode.labelPort1, hasValue:false},

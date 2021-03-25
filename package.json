@@ -1,6 +1,6 @@
 {
   "name": "qm-gpio-get-value",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "method for obtaining values ​​for gpio's",
   "main": "getValue.js",
   "scripts": {
@@ -8,15 +8,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/modulesQuimera/qm-hub-gpio-get-value.git"
+    "url": "git+https://github.com/modulesQuimera/qm-gpio-get-value.git"
   },
   "keywords": ["quimera", "hub", "JIG"],
   "author": "HUB-LSE",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/modulesQuimera/qm-hub-gpio-get-value/issues"
+    "url": "https://github.com/modulesQuimera/qm-gpio-get-value/issues"
   },
-  "homepage": "https://github.com/modulesQuimera/qm-hub-gpio-get-value#readme",
+  "homepage": "https://github.com/modulesQuimera/qm-gpio-get-value#readme",
   "node-red": {
 		"nodes": {
 			"getValue": "getValue.js"
